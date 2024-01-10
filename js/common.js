@@ -3,7 +3,13 @@ const $app = document.getElementById("app");
 
 class DrawingBoard extends Canvas {
   static #instance;
-  #mode = "touch"; // touch | selected | shape-rect | shape-circle
+  static #modeTypes = {
+    1: "touch",
+    2: "selected",
+    3: "shape-rect",
+    4: "shape-circle",
+  };
+  #modeType = DrawingBoard.#modeTypes[1]; // touch | selected | shape-rect | shape-circle
 
   constructor() {
     super();
@@ -25,25 +31,12 @@ class DrawingBoard extends Canvas {
     document.addEventListener("keydown", this.#documentKeydownHandler);
     window.addEventListener("resize", this.#windowResizeHandler);
   }
-  #documentKeydownHandler(event) {
-    switch (event.key) {
-      case "1":
-        this.#mode = "touch";
-        break;
-      case "2":
-        this.#mode = "selected";
-        break;
-      case "3":
-        this.#mode = "shape-rect";
-        break;
-      case "4":
-        this.#mode = "shape-circle";
-        break;
-    }
-  }
-  #windowResizeHandler() {
+  #documentKeydownHandler = (event) => {
+    this.#modeType = DrawingBoard.#modeTypes[event.key] ?? this.#modeType;
+  };
+  #windowResizeHandler = () => {
     this.setCanvasRect(window.innerWidth, window.innerHeight);
-  }
+  };
   #mousedownHandler(event) {}
   #mousemoveHandler(event) {}
   #mouseupHandler(event) {}
