@@ -16,3 +16,17 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
+/* classs */
+.cursor-auto {
+  cursor: auto;
+}
+.cursor-grab {
+  cursor: grab;
+}
+.cursor-grabbing {
+  cursor: grabbing;
+}
+.cursor-crosshair {
+  cursor: crosshair;
+}

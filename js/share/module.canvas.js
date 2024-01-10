@@ -25,6 +25,22 @@ export class Canvas {
     this.#$canvas.height = height;
   }
 
+  resetClass() {
+    this.$canvas.className = "";
+    return this;
+  }
+  containClass(className) {
+    return this.#$canvas.classList.contains(className);
+  }
+  addClass(className) {
+    this.#$canvas.classList.add(className);
+    return this;
+  }
+  removeClass(className) {
+    this.#$canvas.classList.remove(className);
+    return this;
+  }
+
   mount($parentElement) {
     $parentElement.append(this.#$canvas);
     return this;
