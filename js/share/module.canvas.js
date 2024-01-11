@@ -3,6 +3,9 @@ export class Canvas {
   #context;
   #canvasWidth = 0;
   #canvasHeight = 0;
+  #x = 0;
+  #y = 0;
+
   #handlers = new Map();
   constructor() {
     this.#$canvas = document.createElement("canvas");
@@ -24,6 +27,14 @@ export class Canvas {
     this.#canvasHeight = height;
     this.#$canvas.height = height;
   }
+  setX(x) {
+    this.#x = x;
+    return this;
+  }
+  setY(y) {
+    this.#y = y;
+    return this;
+  }
 
   resetClass() {
     this.$canvas.className = "";
@@ -38,6 +49,23 @@ export class Canvas {
   }
   removeClass(className) {
     this.#$canvas.classList.remove(className);
+    return this;
+  }
+
+  beginPath() {
+    this.#context.beginPath();
+    return this;
+  }
+  rect(x, y, width, height) {
+    this.#context.rect(x, y, width, height);
+    return this;
+  }
+  fillStyle(fillColor) {
+    this.#context.fillStyle = fillColor;
+    return this;
+  }
+  fill() {
+    this.#context.fill();
     return this;
   }
 
@@ -58,5 +86,11 @@ export class Canvas {
   }
   get context() {
     return this.#context;
+  }
+  get x() {
+    return this.#x;
+  }
+  get y() {
+    return this.#y;
   }
 }

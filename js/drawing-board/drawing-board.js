@@ -13,6 +13,11 @@ export class DrawingBoard extends Canvas {
     ["3", new DrawingBoardToolShapeRect()],
     ["4", new DrawingBoardToolShapeCircle()],
   ]);
+  #dummyShapes = [
+    { type: "rect", x: -100, y: -100, width: 50, height: 50, fillStyle: "red" },
+    { type: "rect", x: 100, y: 100, width: 50, height: 50, fillStyle: "blue" },
+    { type: "rect", x: 500, y: 150, width: 50, height: 50, fillStyle: "yellow" },
+  ];
   #modeType = DrawingBoard.#modeTypes.get("1");
 
   constructor() {
@@ -21,11 +26,27 @@ export class DrawingBoard extends Canvas {
     this.setCanvasRect(window.innerWidth, window.innerHeight);
     this.#handlerManagment();
     this.#modeType.selected(this);
+    this.dummyShapeRendering();
     return DrawingBoard.#instance;
   }
   static getInstance() {
     if (!DrawingBoard.#instance) DrawingBoard.#instance = new DrawingBoard();
     return DrawingBoard.#instance;
+  }
+  dummyShapeRendering() {
+    this.context.clearRect(0, 0, this.$canvas.width, this.$canvas.height);
+    this.beginPath()
+      .rect(-100 + this.x, -100 + this.y, 50, 50)
+      .fillStyle("red")
+      .fill();
+    this.beginPath()
+      .rect(100 + this.x, 100 + this.y, 50, 50)
+      .fillStyle("blue")
+      .fill();
+    this.beginPath()
+      .rect(500 + this.x, 1500 + this.y, 50, 50)
+      .fillStyle("yellow")
+      .fill();
   }
 
   // handlers
