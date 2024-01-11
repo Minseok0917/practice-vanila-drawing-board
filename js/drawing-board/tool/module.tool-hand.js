@@ -8,25 +8,25 @@ export class DrawingBoardToolHand extends DrawingBoardTool {
     this.setName("손").setDescription("패닝 도구");
   }
   selected(drawingBoardInstance) {
-    drawingBoardInstance.resetClass().addClass("cursor-grab");
+    drawingBoardInstance.renderingLayer.resetClass().addClass("cursor-grab");
   }
 
   mousedownHandler(event, drawingBoardInstance) {
     this.setWorkingProgress();
     this.#setMousedown(event);
-    drawingBoardInstance.resetClass().addClass("cursor-grabbing");
+    drawingBoardInstance.renderingLayer.resetClass().addClass("cursor-grabbing");
   }
   mousemoveHandler(event, drawingBoardInstance) {
     if (this.#mousedown === null) return;
     drawingBoardInstance.setX(Math.round(drawingBoardInstance.x + event.offsetX - this.#mousedown.x));
     drawingBoardInstance.setY(Math.round(drawingBoardInstance.y + event.offsetY - this.#mousedown.y));
-    drawingBoardInstance.dummyShapeRendering();
+    drawingBoardInstance.renderingLayer.rendering();
     this.#setMousedown(event);
   }
   mouseupHandler(event, drawingBoardInstance) {
     this.setWorkingEnd();
     this.#mousedown = null;
-    drawingBoardInstance.resetClass().addClass("cursor-grab");
+    drawingBoardInstance.renderingLayer.resetClass().addClass("cursor-grab");
   }
 
   #setMousedown(event) {

@@ -11,3 +11,8 @@
   left: 0;
   top: 0;
 }
+
+.drawing-board .canvas-container canvas {
+  touch-action: none;
+  image-rendering: pixelated;
+}

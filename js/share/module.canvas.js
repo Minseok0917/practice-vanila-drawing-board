@@ -36,6 +36,10 @@ export class Canvas {
     return this;
   }
 
+  style(property, value) {
+    this.#$canvas.style[property] = value;
+    return this;
+  }
   resetClass() {
     this.$canvas.className = "";
     return this;
@@ -81,10 +85,11 @@ export class Canvas {
     return this;
   }
 
-  resizeObserver($container) {
+  resizeObserver($container, callback) {
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         this.setCanvasRect(entry.contentRect.width, entry.contentRect.height);
+        callback && callback();
       });
     });
     observer.observe($container);

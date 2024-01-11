@@ -6,6 +6,6 @@ export class DrawingBoardToolSelect extends DrawingBoardTool {
     this.setName("선택").setDescription("선택 도구");
   }
   selected(drawingBoardInstance) {
-    drawingBoardInstance.resetClass().addClass("cursor-auto");
+    drawingBoardInstance.renderingLayer.resetClass().addClass("cursor-auto");
   }
 }
