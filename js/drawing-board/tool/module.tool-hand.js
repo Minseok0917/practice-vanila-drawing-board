@@ -18,8 +18,8 @@ export class DrawingBoardToolHand extends DrawingBoardTool {
   }
   mousemoveHandler(event, drawingBoardInstance) {
     if (this.#mousedown === null) return;
-    drawingBoardInstance.setX(drawingBoardInstance.x + event.offsetX - this.#mousedown.x);
-    drawingBoardInstance.setY(drawingBoardInstance.y + event.offsetY - this.#mousedown.y);
+    drawingBoardInstance.setX(Math.round(drawingBoardInstance.x + event.offsetX - this.#mousedown.x));
+    drawingBoardInstance.setY(Math.round(drawingBoardInstance.y + event.offsetY - this.#mousedown.y));
     drawingBoardInstance.dummyShapeRendering();
     this.#setMousedown(event);
   }

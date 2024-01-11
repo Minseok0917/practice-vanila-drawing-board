@@ -30,10 +30,3 @@ export class DrawingBoardTool {
 
   selected() {}
 }
-
-export class DrawingBoardToolShape extends DrawingBoardTool {
-  selected(drawingBoardInstance) {
-    if (drawingBoardInstance.containClass("cursor-crosshair")) return;
-    drawingBoardInstance.resetClass().addClass("cursor-crosshair");
-  }
-}

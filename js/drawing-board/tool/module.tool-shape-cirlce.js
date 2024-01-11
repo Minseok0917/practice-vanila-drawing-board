@@ -1,4 +1,4 @@
-import { DrawingBoardToolShape } from "./module.tool.js";
+import { DrawingBoardToolShape } from "./module.tool-shape.js";
 
 export class DrawingBoardToolShapeCircle extends DrawingBoardToolShape {
   constructor() {

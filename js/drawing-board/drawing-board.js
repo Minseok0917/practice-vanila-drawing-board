@@ -1,8 +1,9 @@
 import { Canvas } from "../share/module.canvas.js";
-import { DrawingBoardToolHand } from "./module.tool-hand.js";
-import { DrawingBoardToolSelect } from "./module.tool-select.js";
-import { DrawingBoardToolShapeRect } from "./module.tool-shape-rect.js";
-import { DrawingBoardToolShapeCircle } from "./module.tool-shape-cirlce.js";
+import { ShapeLayer } from "./shape/module.shape-layer.js";
+import { DrawingBoardToolHand } from "./tool/module.tool-hand.js";
+import { DrawingBoardToolSelect } from "./tool/module.tool-select.js";
+import { DrawingBoardToolShapeRect } from "./tool/module.tool-shape-rect.js";
+import { DrawingBoardToolShapeCircle } from "./tool/module.tool-shape-cirlce.js";
 
 /* 현재는 싱글톤인데 나중에 싱클톤 버리고 여러 개 만들 수 있게끔 만들어야겠음 */
 export class DrawingBoard extends Canvas {
@@ -13,6 +14,8 @@ export class DrawingBoard extends Canvas {
     ["3", new DrawingBoardToolShapeRect()],
     ["4", new DrawingBoardToolShapeCircle()],
   ]);
+  #shapeLayer = "";
+  #shapes = [];
   #dummyShapes = [
     { type: "rect", x: -100, y: -100, width: 50, height: 50, fillStyle: "red" },
     { type: "rect", x: 100, y: 100, width: 50, height: 50, fillStyle: "blue" },
@@ -67,6 +70,7 @@ export class DrawingBoard extends Canvas {
   };
   #windowResizeHandler = () => {
     this.setCanvasRect(window.innerWidth, window.innerHeight);
+    this.dummyShapeRendering();
   };
   #mousedownHandler = (event) => {
     this.#modeType.mousedownHandler && this.#modeType.mousedownHandler(event, this);
