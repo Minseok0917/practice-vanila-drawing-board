@@ -81,6 +81,15 @@ export class Canvas {
     return this;
   }
 
+  resizeObserver($container) {
+    const observer = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        this.setCanvasRect(entry.contentRect.width, entry.contentRect.height);
+      });
+    });
+    observer.observe($container);
+  }
+
   get $canvas() {
     return this.#$canvas;
   }

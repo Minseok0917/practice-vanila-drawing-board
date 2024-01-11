@@ -1,4 +1,13 @@
 .drawing-board {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.drawing-board .canvas-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }

@@ -11,6 +11,13 @@ export class DrawingBoardClone {
     ["shape-layer", new ShapeLayer()],
     ["rendering-layer", new RenderingLayer()],
   ]);
+  #modeTypes = new Map([
+    ["1", new DrawingBoardToolHand()],
+    ["2", new DrawingBoardToolSelect()],
+    ["3", new DrawingBoardToolShapeRect()],
+    ["4", new DrawingBoardToolShapeCircle()],
+  ]);
+  #modeType = this.#modeTypes.get("1");
   /*
     layer 선택
     툴팁은 DrawingBoard의 공통 컴포넌트고 선택에 따라 CanvasLayer가 분리됨
