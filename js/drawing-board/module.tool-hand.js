@@ -8,4 +8,12 @@ export class DrawingBoardToolHand extends DrawingBoardTool {
   selected(drawingBoardInstance) {
     drawingBoardInstance.resetClass().addClass("cursor-grab");
   }
+
+  mousedownHandler(event, drawingBoardInstance) {
+    this.setWorkingProgress();
+  }
+  mousemoveHandler(event, drawingBoardInstance) {}
+  mouseupHandler(event, drawingBoardInstance) {
+    this.setWorkingEnd();
+  }
 }

@@ -39,13 +39,21 @@ export class DrawingBoard extends Canvas {
   #documentKeydownHandler = (event) => {
     if (!DrawingBoard.#modeTypes.has(event.key)) return;
     if (this.#modeType === DrawingBoard.#modeTypes.get(event.key)) return;
+    if (this.#modeType.working) return;
+
     this.#modeType = DrawingBoard.#modeTypes.get(event.key);
     this.#modeType.selected(this);
   };
   #windowResizeHandler = () => {
     this.setCanvasRect(window.innerWidth, window.innerHeight);
   };
-  #mousedownHandler(event) {}
-  #mousemoveHandler(event) {}
-  #mouseupHandler(event) {}
+  #mousedownHandler = (event) => {
+    this.#modeType.mousedownHandler && this.#modeType.mousedownHandler(event, this);
+  };
+  #mousemoveHandler = (event) => {
+    this.#modeType.mousemoveHandler && this.#modeType.mousemoveHandler(event, this);
+  };
+  #mouseupHandler = (event) => {
+    this.#modeType.mouseupHandler && this.#modeType.mouseupHandler(event, this);
+  };
 }
