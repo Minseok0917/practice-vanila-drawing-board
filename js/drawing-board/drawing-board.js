@@ -5,6 +5,23 @@ import { DrawingBoardToolSelect } from "./tool/module.tool-select.js";
 import { DrawingBoardToolShapeRect } from "./tool/module.tool-shape-rect.js";
 import { DrawingBoardToolShapeCircle } from "./tool/module.tool-shape-cirlce.js";
 
+/* 
+  DrawingBoard
+    - LayerManagement
+    - ToolManagement
+    
+
+  제어 추상화
+  - LayerManagement
+  - ToolManagement
+  데이터 추상화
+  - Shape
+  유틸 클래스
+  - Element
+  - Canvas
+  - Context
+*/
+
 export class DrawingBoard {
   #layers = new Map();
   #modeTypes = new Map();
