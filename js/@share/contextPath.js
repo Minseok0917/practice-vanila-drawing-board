@@ -63,4 +63,3 @@ export const CONTEXT_SHAPE_ACTIONS = new Map([
   [CONTEXT_SHAPES.RECT, ContextPathRect],
   [CONTEXT_SHAPES.ELLIPSE, ContextPathEllipse],
 ]);
-console.log(CONTEXT_SHAPE_ACTIONS);
