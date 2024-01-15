@@ -1,28 +1,46 @@
 import { ElementFactory } from "./@share/elementFactory.js";
+import { Canvas } from "./@share/canvas.js";
 import { Context } from "./@share/context.js";
 import { CONTEXT_SHAPE_ACTIONS, ContextPathRect, ContextPathEllipse } from "./@share/contextPath.js";
 
+class Component {
+  constructor(elementName, attrs = {}) {
+    this.$element = ElementFactory.createElement(elementName, attrs);
+  }
+  append($element) {
+    this.$element.append($element);
+    return this;
+  }
+}
+
+class Excalidraw {
+  constructor() {
+    this.canvas = new Canvas().setCanvasSize(window.innerWidth, window.innerHeight);
+    this.context = new Context(this.canvas.$canvas);
+    this.shapes = [
+      new ContextPathRect({ x: 0, y: 0, width: 100, height: 100 }),
+      new ContextPathEllipse({ x: 100, y: 100, rx: 20, ry: 10 }),
+    ];
+
+    this.rendering();
+  }
+
+  rendering() {
+    this.shapes.forEach((contextPath) => this.context.fill(contextPath.path));
+  }
+
+  mount($app) {
+    const root = document.createElement("div");
+    root.innerHTML = `
+      <div class="root">
+        <div class="container"><canvas class="rendering" /></div>
+        <div class="container"><canvas class="working /></div>
+        <div class="container"></div>
+      </div>
+    `;
+    $app.append(this.canvas.$canvas);
+  }
+}
+
 const $app = document.getElementById("app");
-const $canvas = ElementFactory.createElement("canvas");
-const context = new Context($canvas);
-
-$canvas.width = window.innerWidth;
-$canvas.height = window.innerHeight;
-$app.append($canvas);
-
-context.beginPath();
-
-const shapes = [
-  { name: "RECT", x: 0, y: 0, width: 100, height: 100 },
-  { name: "ELLIPSE", x: 200, y: 200, rx: 30, ry: 30 },
-].map((shape) => {
-  const shapeAction = CONTEXT_SHAPE_ACTIONS.get(shape.name);
-  return new shapeAction(shape);
-});
-
-shapes.forEach((contextPath) => context.fill(contextPath.path));
-
-context.fill(new ContextPathRect({ x: 200, y: 0, width: 30, height: 50 }).path);
-context.fill(new ContextPathEllipse({ x: 400, y: 300, rx: 30, ry: 30 }).path);
-
-console.log(JSON.stringify(shapes));
+new Excalidraw().mount($app);
