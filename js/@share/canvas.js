@@ -1,9 +1,9 @@
-import { ElementFactory } from "./elementFactory.js";
+import { createElement } from "./elementFactory.js";
 
 export class Canvas {
   #$canvas;
   constructor() {
-    this.#$canvas = ElementFactory.createElement("canvas");
+    this.#$canvas = createElement("canvas");
     this.cw = this.#$canvas.width;
     this.ch = this.#$canvas.height;
   }
