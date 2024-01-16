@@ -7,3 +7,19 @@ export function createInnerHTML(innerHTML) {
   $container.innerHTML = innerHTML;
   return $container.firstElementChild;
 }
+
+export function addClass($element, className) {
+  $element.classList.add(className);
+}
+
+export function removeClass($element, className) {
+  return $element.classList.remove(className);
+}
+
+export function hasClass($element, className) {
+  return $element.classList.contains(className);
+}
+
+export function updateStyled($element, styles) {
+  Object.assign($element.style, styles);
+}
