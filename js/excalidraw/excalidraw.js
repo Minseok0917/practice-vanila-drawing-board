@@ -1,6 +1,13 @@
 import { createInnerHTML } from "./share/element.js";
-import { Context } from "./share/context.js";
-import { CONTEXT_SHAPE_ACTIONS } from "./share/context-path/index.js";
+import { ExcalidrawCanvas } from "./share/excalidraw.canvas.js";
+import { CONTEXT_SHAPES, CONTEXT_SHAPE_ACTIONS } from "./share/context-path/index.js";
+
+const TOOLS = Object.freeze({
+  HAND: "HAND",
+  SELECT: "SELECT",
+  SHAPE_RECT: "SHAPE_RECT",
+  SHAPE_ELLIPSE: "SHAPE_ELLIPSE",
+});
 
 export function excalidraw() {
   const $excalidraw = createInnerHTML(`
@@ -14,8 +21,18 @@ export function excalidraw() {
   const $excalidrawContainerRenderCanvas = $excalidrawContainerRender.querySelector("canvas");
   const $excalidrawContainerWorkerCanvas = $excalidrawContainerWorker.querySelector("canvas");
 
-  const renderingContext = new Context($excalidrawContainerRenderCanvas);
-  const workerContext = new Context($excalidrawContainerWorkerCanvas);
+  const shapes = [];
+  const renderCanvas = new ExcalidrawCanvas($excalidrawContainerRender, $excalidrawContainerRenderCanvas);
+  const workerCanvas = new ExcalidrawCanvas($excalidrawContainerWorker, $excalidrawContainerWorkerCanvas);
+
+  const selectedTool = TOOLS.HAND;
+
+  return {
+    mount($app) {
+      $app.append($excalidraw);
+    },
+  };
 }
 
-excalidraw();
+const $app = document.getElementById("app");
+excalidraw().mount($app);
