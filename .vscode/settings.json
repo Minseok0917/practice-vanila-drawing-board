@@ -1,5 +1,5 @@
 {
   "files.exclude": {
-    "js/#unrefactoring_drawing-board-*": true
+    "js/#unrefactoring*": true
   }
 }
