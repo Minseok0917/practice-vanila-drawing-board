@@ -23,12 +23,12 @@ class ExcalidrawAction {
 }
 
 export class ExcalidrawActionTool extends ExcalidrawAction {
-  constructor($workContainer) {
+  constructor($workerContainer, render, workerCanvas, state) {
     super([
-      [TOOLS.HAND, new ExcalidrawToolHand($workContainer)],
-      [TOOLS.SELECT, new ExcalidrawToolSelect($workContainer)],
-      [TOOLS.SHAPE_RECT, new ExcalidrawToolShapeRect($workContainer)],
-      [TOOLS.SHAPE_ELLIPSE, new ExcalidrawToolShapeEllipse($workContainer)],
+      [TOOLS.HAND, new ExcalidrawToolHand($workerContainer, render, workerCanvas, state)],
+      [TOOLS.SELECT, new ExcalidrawToolSelect($workerContainer, render, workerCanvas, state)],
+      [TOOLS.SHAPE_RECT, new ExcalidrawToolShapeRect($workerContainer, render, workerCanvas, state)],
+      [TOOLS.SHAPE_ELLIPSE, new ExcalidrawToolShapeEllipse($workerContainer, render, workerCanvas, state)],
     ]);
   }
 }

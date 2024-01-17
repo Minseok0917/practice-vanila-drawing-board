@@ -6,6 +6,9 @@ class ContextPath {
     this.name = name;
     this.#path = new Path2D();
   }
+  newPath() {
+    this.#path = new Path2D();
+  }
 
   get path() {
     return this.#path;
@@ -15,7 +18,7 @@ class ContextPath {
 export class ContextPathRect extends ContextPath {
   constructor({ x, y, width, height }) {
     super(CONTEXT_SHAPES.RECT);
-    this.defineShape({ x, y, width, height }).draw();
+    this.defineShape({ x, y, width, height }).draw(this);
   }
 
   defineShape({ x, y, width, height }) {
@@ -26,8 +29,9 @@ export class ContextPathRect extends ContextPath {
     return this;
   }
 
-  draw() {
-    this.path.rect(this.x, this.y, this.width, this.height);
+  draw({ x, y, width, height }) {
+    this.newPath();
+    this.path.rect(x, y, width, height);
     return this;
   }
 }
@@ -47,6 +51,7 @@ export class ContextPathEllipse extends ContextPath {
   }
 
   draw() {
+    this.newPath();
     this.path.ellipse(this.x, this.y, this.rx, this.ry, 0, 0, 2 * Math.PI);
     return this;
   }

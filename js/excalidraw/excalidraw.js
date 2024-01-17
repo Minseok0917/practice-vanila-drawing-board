@@ -1,7 +1,8 @@
 import { createInnerHTML } from "./share/element.js";
 import { TOOLS, LAYERS } from "./share/excalidraw.constant.js";
-import { ExcalidrawCanvas } from "./share/excalidraw.canvas.js";
+import { ExcalidrawCanvasRender, ExcalidrawCanvasWorker } from "./share/excalidraw.canvas.js";
 import { CONTEXT_SHAPES, CONTEXT_SHAPE_ACTIONS } from "./share/context-path/index.js";
+import { ContextPathRect, ContextPathEllipse } from "./share/context-path/context-path.shapes.js";
 import {
   ExcalidrawActionTool,
   ExcalidrawActionKeydownTool,
@@ -21,24 +22,33 @@ export function excalidraw() {
   const $excalidrawContainerRenderCanvas = $excalidrawContainerRender.querySelector("canvas");
   const $excalidrawContainerWorkerCanvas = $excalidrawContainerWorker.querySelector("canvas");
 
+  // state
+  const state = {
+    shapes: [
+      new ContextPathRect({ x: -100, y: -100, width: 120, height: 120 }),
+      new ContextPathRect({ x: 100, y: -10, width: 50, height: 50 }),
+      new ContextPathRect({ x: -10, y: 500, width: 100, height: 200 }),
+      new ContextPathRect({ x: 600, y: 80, width: 80, height: 150 }),
+    ],
+    selectedTool: TOOLS.HAND,
+    selectedLayer: null,
+    canvasX: 0,
+    canvasY: 0,
+  };
+
   // instances
-  const renderCanvas = new ExcalidrawCanvas($excalidrawContainerRender, $excalidrawContainerRenderCanvas);
-  const workerCanvas = new ExcalidrawCanvas($excalidrawContainerWorker, $excalidrawContainerWorkerCanvas);
+  const renderCanvas = new ExcalidrawCanvasRender($excalidrawContainerRender, $excalidrawContainerRenderCanvas, state);
+  const workerCanvas = new ExcalidrawCanvasWorker($excalidrawContainerWorker, $excalidrawContainerWorkerCanvas);
 
   // actions
-  const toolActions = new ExcalidrawActionTool($excalidrawContainerWorker);
+  const toolActions = new ExcalidrawActionTool($excalidrawContainerWorker, renderCanvas, workerCanvas, state);
   const keydownToolActions = new ExcalidrawActionKeydownTool();
   const containerActions = new ExcalidrawActionContainer({
     [LAYERS.RENDER]: $excalidrawContainerRender,
     [LAYERS.WORKER]: $excalidrawContainerWorker,
   });
 
-  // state & getters
-  const state = {
-    shapes: [],
-    selectedTool: TOOLS.HAND,
-    selectedLayer: null,
-  };
+  // getters
   const getters = Object.freeze({
     get selectedToolAction() {
       return toolActions.getAction(state.selectedTool);
@@ -51,9 +61,18 @@ export function excalidraw() {
     state.selectedTool = keydownToolActions.getAction(event.key);
     getters.selectedToolAction.selected(containerActions);
   }
-  function handleExcalidrawMousedown(event) {}
-  function handleExcalidrawMousemove(event) {}
-  function handleExcalidrawMouseup(event) {}
+  function handleExcalidrawMousedown(event) {
+    if (!getters.selectedToolAction.handleMousedown) return;
+    getters.selectedToolAction.handleMousedown(event);
+  }
+  function handleExcalidrawMousemove(event) {
+    if (!getters.selectedToolAction.handleMouseup) return;
+    getters.selectedToolAction.handleMousemove(event);
+  }
+  function handleExcalidrawMouseup(event) {
+    if (!getters.selectedToolAction.handleMousemove) return;
+    getters.selectedToolAction.handleMouseup(event);
+  }
 
   document.addEventListener("keydown", handleDocumentKeydown);
   $excalidraw.addEventListener("mousedown", handleExcalidrawMousedown);
