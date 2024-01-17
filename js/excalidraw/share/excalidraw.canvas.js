@@ -31,13 +31,8 @@ export class ExcalidrawCanvasRender extends ExcalidrawCanvas {
     this.context.clearAll();
 
     shapes.forEach((shape) => {
-      shape.draw({
-        x: shape.x + canvasX,
-        y: shape.y + canvasY,
-        width: shape.width,
-        height: shape.height,
-      });
-      this.context.beginPath().fill(shape.path);
+      shape.draw({ ...shape.getShapeInfo(), canvasX, canvasY });
+      this.context.beginPath().stroke(shape.path);
     });
   }
 }

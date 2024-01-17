@@ -29,9 +29,18 @@ export class ContextPathRect extends ContextPath {
     return this;
   }
 
-  draw({ x, y, width, height }) {
+  getShapeInfo() {
+    return {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
+    };
+  }
+
+  draw({ x, y, width, height, canvasX = 0, canvasY = 0 }) {
     this.newPath();
-    this.path.rect(x, y, width, height);
+    this.path.rect(x + canvasX, y + canvasY, width, height);
     return this;
   }
 }
@@ -39,7 +48,7 @@ export class ContextPathRect extends ContextPath {
 export class ContextPathEllipse extends ContextPath {
   constructor({ x, y, rx, ry }) {
     super(CONTEXT_SHAPES.ELLIPSE);
-    this.defineShape({ x, y, rx, ry }).draw();
+    this.defineShape({ x, y, rx, ry }).draw(this);
   }
 
   defineShape({ x, y, rx, ry }) {
@@ -50,9 +59,18 @@ export class ContextPathEllipse extends ContextPath {
     return this;
   }
 
-  draw() {
+  getShapeInfo() {
+    return {
+      x: this.x,
+      y: this.y,
+      rx: this.rx,
+      ry: this.ry,
+    };
+  }
+
+  draw({ x, y, rx, ry, canvasX = 0, canvasY = 0 }) {
     this.newPath();
-    this.path.ellipse(this.x, this.y, this.rx, this.ry, 0, 0, 2 * Math.PI);
+    this.path.ellipse(x + canvasX, y + canvasY, rx, ry, 0, 0, 2 * Math.PI);
     return this;
   }
 }

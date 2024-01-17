@@ -8,6 +8,7 @@ export class Context {
 
   clearAll() {
     this.#context.clearRect(0, 0, this.#$canvas.width, this.#$canvas.height);
+    return this;
   }
 
   beginPath() {
@@ -22,6 +23,11 @@ export class Context {
 
   fill(contextPath) {
     this.#context.fill(contextPath);
+    return this;
+  }
+
+  stroke(contextPath) {
+    this.#context.stroke(contextPath);
     return this;
   }
 }
