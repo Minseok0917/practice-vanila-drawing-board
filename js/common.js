@@ -1,1 +1,1 @@
-import "./excalidraw/excalidraw.js";
+import "./excalidraw/excalidraw-modify.js";
