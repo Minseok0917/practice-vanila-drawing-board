@@ -16,6 +16,7 @@ $app.append($excalidraw);
 function createRect(x, y, width, height) {
   const paths = {
     rect: new Path2D(),
+    rectBlueLine: new Path2D(),
     rectEllipseLT: new Path2D(),
     rectEliipseMT: new Path2D(),
     rectEliipseRT: new Path2D(),
@@ -26,30 +27,56 @@ function createRect(x, y, width, height) {
     rectEliipseLM: new Path2D(),
   };
 
-  const startX = x;
-  const middleX = x + width / 2;
-  const endX = x + width;
+  const gap = 8;
+  const roundRectWH = 8;
 
-  const startY = y;
-  const middleY = y + height / 2;
-  const endY = y + height;
+  const lineX = x - gap - roundRectWH / 2;
+  const lineWidth = width + gap * 2;
+  const lineY = y - gap - roundRectWH / 2;
+  const lineHeight = height + gap * 2;
+
+  const startX = lineX;
+  const middleX = lineX + lineWidth / 2;
+  const endX = lineX + lineWidth;
+
+  const startY = lineY;
+  const middleY = lineY + lineHeight / 2;
+  const endY = lineY + lineHeight;
 
   paths.rect.rect(x, y, width, height);
-  paths.rectEllipseLT.arc(startX, startY, 5, 0, Math.PI * 2);
-  paths.rectEliipseMT.arc(middleX, startY, 5, 0, Math.PI * 2);
-  paths.rectEliipseRT.arc(endX, startY, 5, 0, Math.PI * 2);
-  paths.rectEliipseRM.arc(endX, middleY, 5, 0, Math.PI * 2);
-  paths.rectEliipseRB.arc(endX, endY, 5, 0, Math.PI * 2);
-  paths.rectEliipseMB.arc(middleX, endY, 5, 0, Math.PI * 2);
-  paths.rectEliipseLB.arc(startX, endY, 5, 0, Math.PI * 2);
-  paths.rectEliipseLM.arc(startX, middleY, 5, 0, Math.PI * 2);
+  paths.rectBlueLine.rect(x - gap, y - gap, width + gap * 2, height + gap * 2);
+  paths.rectEllipseLT.roundRect(startX, startY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseMT.roundRect(middleX, startY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseRT.roundRect(endX, startY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseRM.roundRect(endX, middleY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseRB.roundRect(endX, endY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseMB.roundRect(middleX, endY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseLB.roundRect(startX, endY, roundRectWH, roundRectWH, [roundRectWH / 4]);
+  paths.rectEliipseLM.roundRect(startX, middleY, roundRectWH, roundRectWH, [roundRectWH / 4]);
 
   return paths;
 }
 const rectPaths = createRect(200, 200, 200, 200);
 const selectedRect = rectPaths;
 
-context.stroke(rectPaths.rect);
+context.lineWidth = 1;
+context.strokeStyle = "#3f51b5";
+context.fillStyle = "#fff";
+
+context.stroke(rectPaths.rectBlueLine);
+context.fill(rectPaths.rectBlueLine);
+
+context.lineWidth = 0.5;
+
+context.stroke(rectPaths.rectEllipseLT);
+context.stroke(rectPaths.rectEliipseMT);
+context.stroke(rectPaths.rectEliipseRT);
+context.stroke(rectPaths.rectEliipseRM);
+context.stroke(rectPaths.rectEliipseRB);
+context.stroke(rectPaths.rectEliipseMB);
+context.stroke(rectPaths.rectEliipseLB);
+context.stroke(rectPaths.rectEliipseLM);
+
 context.fill(rectPaths.rectEllipseLT);
 context.fill(rectPaths.rectEliipseMT);
 context.fill(rectPaths.rectEliipseRT);
@@ -58,6 +85,12 @@ context.fill(rectPaths.rectEliipseRB);
 context.fill(rectPaths.rectEliipseMB);
 context.fill(rectPaths.rectEliipseLB);
 context.fill(rectPaths.rectEliipseLM);
+
+context.lineWidth = 1;
+context.strokeStyle = "#000";
+context.fillStyle = "#fff";
+context.stroke(rectPaths.rect);
+context.fill(rectPaths.rect);
 
 $excalidrawCanvas.addEventListener("mousemove", function (event) {
   const { offsetX: x, offsetY: y } = event;
@@ -78,7 +111,7 @@ $excalidrawCanvas.addEventListener("mousemove", function (event) {
     $excalidrawCanvas.style.cursor = "sw-resize";
   } else if (context.isPointInPath(selectedRect.rectEliipseLM, x, y)) {
     $excalidrawCanvas.style.cursor = "e-resize";
-  } else if (context.isPointInPath(selectedRect.rect, x, y)) {
+  } else if (context.isPointInPath(selectedRect.rectBlueLine, x, y)) {
     $excalidrawCanvas.style.cursor = "all-scroll";
   } else {
     $excalidrawCanvas.style.cursor = "auto";
