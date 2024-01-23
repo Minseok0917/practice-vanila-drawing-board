@@ -16,6 +16,7 @@ $app.append($excalidraw);
 function createRect(x, y, width, height) {
   const paths = {
     rect: new Path2D(),
+    arcRotate: new Path2D(),
     rectBlueLine: new Path2D(),
     rectEllipseLT: new Path2D(),
     rectEliipseMT: new Path2D(),
@@ -54,10 +55,50 @@ function createRect(x, y, width, height) {
   paths.rectEliipseLB.roundRect(startX, endY, roundRectWH, roundRectWH, [roundRectWH / 4]);
   paths.rectEliipseLM.roundRect(startX, middleY, roundRectWH, roundRectWH, [roundRectWH / 4]);
 
+  paths.arcRotate.arc(middleX + gap / 2, startY - gap * 1.5, gap / 2, 0, Math.PI * 2);
+
   return paths;
 }
-const rectPaths = createRect(200, 200, 200, 200);
-const selectedRect = rectPaths;
+// const rectPaths = createRect(200, 200, 200, 200);
+// const selectedRect = rectPaths;
+
+function draw() {
+  // left rectangles, rotate from canvas origin
+  context.save();
+  // blue rect
+  context.fillStyle = "#0095DD";
+  context.fillRect(30, 30, 100, 100);
+  context.rotate((Math.PI / 180) * 25);
+  // grey rect
+  context.fillStyle = "#4D4E53";
+  context.fillRect(30, 30, 100, 100);
+  context.restore();
+
+  // right rectangles, rotate from rectangle center
+  // draw blue rect
+  context.fillStyle = "#0095DD";
+  context.fillRect(150, 30, 100, 100);
+
+  context.translate(200, 80); // translate to rectangle center
+  // x = x + 0.5 * width
+  // y = y + 0.5 * height
+  context.rotate((Math.PI / 180) * 135); // rotate
+  context.translate(-200, -80); // translate back
+
+  // draw grey rect
+  context.fillStyle = "#4D4E53";
+  context.fillRect(150, 30, 100, 100);
+}
+
+draw();
+/* context.lineWidth = 0.5;
+context.strokeStyle = "#000";
+context.fillStyle = "#fff";
+context.stroke(rectPaths.arcRotate);
+context.fill(rectPaths.arcRotate);
+
+context.moveTo(200, 200);
+context.rotate((10 * Math.PI) / 180);
 
 context.lineWidth = 1;
 context.strokeStyle = "#3f51b5";
@@ -90,9 +131,9 @@ context.lineWidth = 1;
 context.strokeStyle = "#000";
 context.fillStyle = "#fff";
 context.stroke(rectPaths.rect);
-context.fill(rectPaths.rect);
+context.fill(rectPaths.rect); */
 
-$excalidrawCanvas.addEventListener("mousemove", function (event) {
+/* $excalidrawCanvas.addEventListener("mousemove", function (event) {
   const { offsetX: x, offsetY: y } = event;
 
   if (context.isPointInPath(selectedRect.rectEllipseLT, x, y)) {
@@ -113,7 +154,9 @@ $excalidrawCanvas.addEventListener("mousemove", function (event) {
     $excalidrawCanvas.style.cursor = "e-resize";
   } else if (context.isPointInPath(selectedRect.rectBlueLine, x, y)) {
     $excalidrawCanvas.style.cursor = "all-scroll";
+  } else if (context.isPointInPath(selectedRect.arcRotate, x, y)) {
+    $excalidrawCanvas.style.cursor = "grab";
   } else {
     $excalidrawCanvas.style.cursor = "auto";
   }
-});
+}); */
