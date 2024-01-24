@@ -22,7 +22,8 @@
     // resolve alias
     "paths": {
       "@/*": ["./src/*"],
-      "@share/*": ["./src/share/*"]
+      "@share/*": ["./src/share/*"],
+      "@scss/*": ["./src/assets/scss/*"]
     }
   },
   "include": ["src"]

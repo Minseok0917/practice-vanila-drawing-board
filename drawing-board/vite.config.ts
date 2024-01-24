@@ -6,6 +6,7 @@ const resolveAliasToPath = (alias: Record<string, string>) => Object.fromEntries
 const resolveAlias = resolveAliasToPath({
   "@": "/",
   "@share": "/share",
+  "@scss": "/assets/scss",
 });
 
 export default defineConfig({
