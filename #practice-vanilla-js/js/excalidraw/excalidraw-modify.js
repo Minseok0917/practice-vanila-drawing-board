@@ -59,10 +59,12 @@ function createRect(x, y, width, height) {
 
   return paths;
 }
-// const rectPaths = createRect(200, 200, 200, 200);
-// const selectedRect = rectPaths;
+function modifyRect(x, y, width, height) {}
 
-function draw() {
+const rectPaths = createRect(200, 200, 200, 200);
+const selectedRect = rectPaths;
+
+/* function draw() {
   // left rectangles, rotate from canvas origin
   context.save();
   // blue rect
@@ -90,15 +92,15 @@ function draw() {
   context.fillRect(150, 30, 100, 100);
 }
 
-draw();
-/* context.lineWidth = 0.5;
+draw(); */
+context.lineWidth = 0.5;
 context.strokeStyle = "#000";
 context.fillStyle = "#fff";
 context.stroke(rectPaths.arcRotate);
 context.fill(rectPaths.arcRotate);
 
-context.moveTo(200, 200);
-context.rotate((10 * Math.PI) / 180);
+// context.moveTo(200, 200);
+// context.rotate((10 * Math.PI) / 180);
 
 context.lineWidth = 1;
 context.strokeStyle = "#3f51b5";
@@ -131,9 +133,9 @@ context.lineWidth = 1;
 context.strokeStyle = "#000";
 context.fillStyle = "#fff";
 context.stroke(rectPaths.rect);
-context.fill(rectPaths.rect); */
+context.fill(rectPaths.rect);
 
-/* $excalidrawCanvas.addEventListener("mousemove", function (event) {
+$excalidrawCanvas.addEventListener("mousemove", function (event) {
   const { offsetX: x, offsetY: y } = event;
 
   if (context.isPointInPath(selectedRect.rectEllipseLT, x, y)) {
@@ -159,4 +161,18 @@ context.fill(rectPaths.rect); */
   } else {
     $excalidrawCanvas.style.cursor = "auto";
   }
-}); */
+});
+
+class Rect {
+  #x;
+  #y;
+  #width;
+  #height;
+
+  constructor({ x, y, width, height }) {
+    this.#x = x;
+    this.#y = y;
+    this.#width = width;
+    this.#height = height;
+  }
+}
