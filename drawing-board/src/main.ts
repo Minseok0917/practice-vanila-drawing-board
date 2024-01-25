@@ -1,14 +1,11 @@
+import { setupAnother } from "@/app";
 import "@scss/all.scss";
-import { Canvas } from "@share/canvas";
 
-const $app = document.querySelector<HTMLDivElement>("#app")!;
-const $canvas: HTMLCanvasElement = document.createElement("canvas");
-const context: CanvasRenderingContext2D = $canvas.getContext("2d")!;
-
-$app.innerHTML = `
-  <div class="another w-full h-full">
-    <div class="canvas-container"> </div>
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+  <div class="another">
+    <div class="canvas-container canvas-container-render"><canvas /></div>
+    <div class="canvas-container canvas-container-worker"><canvas /></div>
   </div>
 `;
 
-// const a = Canvas.install($canvas).updateWidth(window.innerWidth).updateHeight(window.innerHeight);
+setupAnother(document.querySelector<HTMLDivElement>("#app .another")!);

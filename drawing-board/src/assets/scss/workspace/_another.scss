@@ -1,3 +1,14 @@
 .another {
-  @apply w-full h-full;
+  @apply relative w-full h-full;
+
+  .canvas-container {
+    @apply absolute left-0 top-0;
+
+    &-render {
+      @apply z-0;
+    }
+    &-worker {
+      @apply z-10;
+    }
+  }
 }
