@@ -20,10 +20,12 @@
     "noFallthroughCasesInSwitch": true,
 
     // resolve alias
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "@share/*": ["./src/share/*"],
-      "@scss/*": ["./src/assets/scss/*"]
+      "@/*": ["src/*"],
+      "@share": ["src/share"],
+      "@share/*": ["src/share/*"],
+      "@scss/*": ["src/assets/scss/*"]
     }
   },
   "include": ["src"]
