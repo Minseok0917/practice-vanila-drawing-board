@@ -2,7 +2,7 @@ import { setupAnother } from "@/app";
 import "@scss/all.scss";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div class="another">
+  <div id="another">
     <div class="canvas-container canvas-container-render"><canvas /></div>
     <div class="canvas-container canvas-container-worker"><canvas /></div>
   </div>
