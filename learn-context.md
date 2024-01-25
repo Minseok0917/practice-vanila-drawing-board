@@ -40,16 +40,16 @@
 
 [그라데이션 및 패턴]
 
-- CanvasRenderingContext2D.createConicGradient
-- CanvasRenderingContext2D.createLinearGradient
-- CanvasRenderingContext2D.createRadialGradient
+- CanvasRenderingContext2D.createConicGradient (원추형)
+- CanvasRenderingContext2D.createLinearGradient (선형)
+- CanvasRenderingContext2D.createRadialGradient (방사형)
 
 [그림자]
 
-- CanvasRenderingContext2D.shadowBlur
-- CanvasRenderingContext2D.shadowColor
-- CanvasRenderingContext2D.shadowOffsetX
-- CanvasRenderingContext2D.shadowOffsetY
+- CanvasRenderingContext2D.shadowBlur (흐림 효과)
+- CanvasRenderingContext2D.shadowColor (흐림 컬러)
+- CanvasRenderingContext2D.shadowOffsetX (흐림 X)
+- CanvasRenderingContext2D.shadowOffsetY (흐림 Y)
 
 [경로]
 
@@ -57,8 +57,8 @@
 - CanvasRenderingContext2D.closePath
 - CanvasRenderingContext2D.moveTo
 - CanvasRenderingContext2D.lineTo
-- CanvasRenderingContext2D.bezierCurveTo
-- CanvasRenderingContext2D.quadraticCurveTo
+- CanvasRenderingContext2D.bezierCurveTo (3차 곡선)
+- CanvasRenderingContext2D.quadraticCurveTo (2차 곡선)
 - CanvasRenderingContext2D.arc
 - CanvasRenderingContext2D.arcTo
 - CanvasRenderingContext2D.ellipse
