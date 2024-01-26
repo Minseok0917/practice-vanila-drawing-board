@@ -2,6 +2,7 @@ import { AnotherStoreState } from "./interface";
 import { Canvas, Context2D } from "@/share";
 import { ITool } from "../tools/interface";
 import { TOOL_ACTIONS } from "../tools/action";
+import { CURSOR } from "./constant";
 
 export class AnotherStore {
   private static instance: AnotherStore;
@@ -11,15 +12,19 @@ export class AnotherStore {
     this._state = state;
   }
 
-  public static install(state: AnotherStoreState): AnotherStore {
-    if (!AnotherStore.instance) {
+  public static install(state?: AnotherStoreState): { anotherStore: AnotherStore } {
+    if (!AnotherStore.instance && state) {
       AnotherStore.instance = new AnotherStore(state);
     }
-    return AnotherStore.instance;
+    return { anotherStore: AnotherStore.instance };
   }
 
   public setState(newState: Partial<AnotherStoreState>): void {
     this._state = { ...this._state, ...newState };
+  }
+
+  public changeCanvasCursor(cursorName: CURSOR): void {
+    this.$workerContainerCanvas.style.cursor = cursorName;
   }
 
   public get $renderContainer(): HTMLDivElement {

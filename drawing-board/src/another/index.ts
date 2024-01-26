@@ -20,7 +20,7 @@ export function setupAnother($another: HTMLDivElement) {
   const renderContextInstance: Context2D = new Context2D($renderContainerCanvas);
   const workerContextInstance: Context2D = new Context2D($workerContainerCanvas);
 
-  const anotherStore = AnotherStore.install({
+  const { anotherStore } = AnotherStore.install({
     $renderContainer,
     $workerContainer,
     $renderContainerCanvas,
@@ -31,6 +31,7 @@ export function setupAnother($another: HTMLDivElement) {
     workerContextInstance,
     selectedTool: TOOLS.HAND,
   });
+  anotherStore.selectedToolAction.selected();
 
   renderCanvasInstance.updateResize(window.innerWidth, window.innerHeight);
   workerCanvasInstance.updateResize(window.innerWidth, window.innerHeight);
