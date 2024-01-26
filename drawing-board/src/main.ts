@@ -1,4 +1,4 @@
-import { setupAnother } from "@/app";
+import { setupAnother } from "@another";
 import "@scss/all.scss";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
@@ -8,4 +8,4 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-setupAnother(document.querySelector<HTMLDivElement>("#app .another")!);
+setupAnother(document.getElementById("another")! as HTMLDivElement);

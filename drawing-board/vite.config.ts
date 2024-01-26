@@ -7,6 +7,7 @@ const resolveAlias = resolveAliasToPath({
   "@": "/",
   "@share": "/share",
   "@scss": "/assets/scss",
+  "@another": "/assets/another",
 });
 
 export default defineConfig({

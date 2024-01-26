@@ -1,0 +1,10 @@
+import { ITool } from "../interface";
+import { ToolShape } from "./shape/tool.shape";
+
+export class ToolShapeRect extends ToolShape implements ITool {
+  public mousedown(event: MouseEvent) {
+    console.log("ToolShap");
+  }
+  public mousemove(event: MouseEvent) {}
+  public mouseup(event: MouseEvent) {}
+}
