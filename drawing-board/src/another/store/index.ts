@@ -24,7 +24,11 @@ export class AnotherStore {
   }
 
   public changeCanvasCursor(cursorName: CURSOR): void {
-    this.$workerContainerCanvas.style.cursor = cursorName;
+    this.$workerContainer.style.cursor = cursorName;
+  }
+
+  public get $another(): HTMLDivElement {
+    return this._state.$another;
   }
 
   public get $renderContainer(): HTMLDivElement {

@@ -1,8 +1,8 @@
 html,
 body {
-  @apply w-full h-full;
+  @apply w-full h-full overflow-hidden;
 }
 
 #app {
-  @apply w-full h-full;
+  @apply w-full h-full overflow-hidden;
 }

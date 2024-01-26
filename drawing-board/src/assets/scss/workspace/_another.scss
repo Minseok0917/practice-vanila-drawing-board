@@ -1,14 +1,20 @@
 #another {
-  @apply relative w-full h-full;
+  @apply relative w-full h-full select-none;
 
   .canvas-container {
-    @apply absolute left-0 top-0;
+    @apply absolute w-full h-full left-0 top-0 z-0;
 
     &-render {
-      @apply z-0;
+      pointer-events: none;
     }
+
     &-worker {
-      @apply z-10;
+      z-index: 100;
+
+      canvas {
+        touch-action: none;
+        image-rendering: pixelated;
+      }
     }
   }
 }

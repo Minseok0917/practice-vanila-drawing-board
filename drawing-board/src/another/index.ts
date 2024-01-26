@@ -21,6 +21,7 @@ export function setupAnother($another: HTMLDivElement) {
   const workerContextInstance: Context2D = new Context2D($workerContainerCanvas);
 
   const { anotherStore } = AnotherStore.install({
+    $another,
     $renderContainer,
     $workerContainer,
     $renderContainerCanvas,
