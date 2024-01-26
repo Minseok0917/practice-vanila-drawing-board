@@ -1,4 +1,4 @@
-import { ITool } from "../interface";
+import type { ITool } from "../interface";
 import { AnotherStore } from "@/another/store";
 import { CURSOR } from "@/another/store/constant";
 

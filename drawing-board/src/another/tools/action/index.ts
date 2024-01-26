@@ -1,4 +1,4 @@
-import { ITool } from "../interface";
+import type { ITool } from "../interface";
 import { TOOLS } from "../constant";
 import { ToolHand, ToolSelect, ToolShapeRect, ToolShapeEllipse } from "../classes";
 

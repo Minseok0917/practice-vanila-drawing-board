@@ -1,8 +1,8 @@
 import { AnotherStoreState } from "./interface";
-import { Canvas, Context2D } from "@/share";
-import { ITool } from "../tools/interface";
 import { TOOL_ACTIONS } from "../tools/action";
-import { CURSOR } from "./constant";
+import type { Canvas, Context2D } from "@/share";
+import type { ITool } from "../tools/interface";
+import type { CURSOR } from "./constant";
 
 export class AnotherStore {
   private static instance: AnotherStore;

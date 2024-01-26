@@ -1,4 +1,4 @@
-import { ITool } from "../interface";
+import type { ITool } from "../interface";
 import { ToolShape } from "./shape/tool.shape";
 
 export class ToolShapeRect extends ToolShape implements ITool {

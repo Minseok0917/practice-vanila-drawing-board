@@ -1,5 +1,5 @@
-import { Canvas, Context2D } from "@/share";
-import { TOOLS } from "@/another/tools/constant";
+import type { Canvas, Context2D } from "@/share";
+import type { TOOLS } from "@/another/tools/constant";
 
 export interface AnotherStoreState {
   $another: HTMLDivElement;
