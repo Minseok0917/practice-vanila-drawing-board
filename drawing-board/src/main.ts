@@ -1,4 +1,4 @@
-import { setupAnother } from "@another";
+import { setupAnother } from "./another";
 import "@scss/all.scss";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
